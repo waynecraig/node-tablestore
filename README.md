@@ -32,73 +32,73 @@
 
 ## API 接口实现进度
 
-[ ] CreateTable
-[ ] ListTable
-[ ] DescribeTable
-[ ] UpdateTable
-[ ] DeleteTable
-[ ] ComputeSplitPointsBySize
+- [ ] CreateTable
+- [ ] ListTable
+- [ ] DescribeTable
+- [ ] UpdateTable
+- [ ] DeleteTable
+- [ ] ComputeSplitPointsBySize
 
-[ ] GetRow
-[ ] PutRow
-[ ] UpdateRow
-[ ] DeleteRow
-[ ] GetRange
-[ ] BatchGetRow
-[ ] BatchWriteRow
+- [ ] GetRow
+- [ ] PutRow
+- [ ] UpdateRow
+- [ ] DeleteRow
+- [ ] GetRange
+- [ ] BatchGetRow
+- [ ] BatchWriteRow
 
-[ ] AddDefinedColumn
-[ ] DeleteDefinedColumn
+- [ ] AddDefinedColumn
+- [ ] DeleteDefinedColumn
 
-[ ] CreateIndex
-[ ] DropIndex
+- [ ] CreateIndex
+- [ ] DropIndex
 
-[ ] CreateSearchIndex
-[ ] ListSearchIndex
-[ ] DescribeSearchIndex
-[ ] DeleteSearchIndex
-[ ] Search
-[ ] ComputeSplits
-[ ] ParallelScan
+- [ ] CreateSearchIndex
+- [ ] ListSearchIndex
+- [ ] DescribeSearchIndex
+- [ ] DeleteSearchIndex
+- [ ] Search
+- [ ] ComputeSplits
+- [ ] ParallelScan
 
-[ ] CreateTunnel
-[ ] ListTunnel
-[ ] DescribeTunnel
-[ ] DeleteTunnel
+- [ ] CreateTunnel
+- [ ] ListTunnel
+- [ ] DescribeTunnel
+- [ ] DeleteTunnel
 
-[ ] ListStream
-[ ] DescribeStream
-[ ] GetShardIterator
-[ ] GetStreamRecord
+- [ ] ListStream
+- [ ] DescribeStream
+- [ ] GetShardIterator
+- [ ] GetStreamRecord
 
-[ ] BulkImport
-[ ] BulkExport
+- [ ] BulkImport
+- [ ] BulkExport
 
-[ ] StartLocalTransaction
-[ ] CommitTransaction
-[ ] AbortTransaction
+- [ ] StartLocalTransaction
+- [ ] CommitTransaction
+- [ ] AbortTransaction
 
-[ ] SQLQuery
+- [ ] SQLQuery
 
-[ ] CreateTimeseriesTable
-[ ] ListTimeseriesTable
-[ ] DescribeTimeseriesTable
-[ ] UpdateTimeseriesTable
-[ ] DeleteTimeseriesTable
+- [ ] CreateTimeseriesTable
+- [ ] ListTimeseriesTable
+- [ ] DescribeTimeseriesTable
+- [ ] UpdateTimeseriesTable
+- [ ] DeleteTimeseriesTable
 
-[ ] CreateTimeseriesAnalyticalStore
-[ ] UpdateTimeseriesAnalyticalStore
-[ ] DescribeTimeseriesAnalyticalStore
-[ ] DeleteTimeseriesAnalyticalStore
+- [ ] CreateTimeseriesAnalyticalStore
+- [ ] UpdateTimeseriesAnalyticalStore
+- [ ] DescribeTimeseriesAnalyticalStore
+- [ ] DeleteTimeseriesAnalyticalStore
 
-[ ] PutTimeseriesData
-[ ] GetTimeseriesData
-[ ] UpdateTimeseriesMeta
-[ ] QueryTimeseriesMeta
-[ ] DeleteTimeseriesMeta
-[ ] SplitTimeseriesScanTask
-[ ] ScanTimeseriesData
+- [ ] PutTimeseriesData
+- [ ] GetTimeseriesData
+- [ ] UpdateTimeseriesMeta
+- [ ] QueryTimeseriesMeta
+- [ ] DeleteTimeseriesMeta
+- [ ] SplitTimeseriesScanTask
+- [ ] ScanTimeseriesData
 
-[ ] CreateTimeseriesLastpointIndex
-[ ] DeleteTimeseriesLastpointIndex
+- [ ] CreateTimeseriesLastpointIndex
+- [ ] DeleteTimeseriesLastpointIndex
 
