@@ -1,6 +1,16 @@
 import { Root, load } from "protobufjs";
-import { GetRowRequest, GetRowResponse } from "./types";
-import { encodePlainBuffer, decodePlainBuffer } from "plainbuffer";
+import {
+  Attribute,
+  GetRowRequest,
+  GetRowResponse,
+  PrimaryKeyItem,
+  Row,
+} from "./types";
+import {
+  encodePlainBuffer,
+  decodePlainBuffer,
+  PlainBufferRow,
+} from "plainbuffer";
 import { createHash, createHmac } from "crypto";
 import { request } from "undici";
 
@@ -18,7 +28,9 @@ export class TablestoreClient {
   private accessKeySecret: string;
   private instanceName: string;
   private securityToken?: string;
-  private protoRoot!: Root;
+
+  private protoApi?: Root;
+  private protoFilter?: Root;
 
   constructor(options: ClientOptions) {
     this.endpoint = options.endpoint;
@@ -28,10 +40,18 @@ export class TablestoreClient {
     this.securityToken = options.securityToken;
   }
 
-  public async init() {
-    if (!this.protoRoot) {
-      this.protoRoot = await load("tablestore.proto");
+  private async getProtoApi(): Promise<Root> {
+    if (!this.protoApi) {
+      this.protoApi = await load("protocol/ots_internal_api.proto");
     }
+    return this.protoApi;
+  }
+
+  private async getProtoFilter(): Promise<Root> {
+    if (!this.protoFilter) {
+      this.protoFilter = await load("protocol/ots_filter.proto");
+    }
+    return this.protoFilter;
   }
 
   private async request(uri: string, body: Uint8Array): Promise<ArrayBuffer> {
@@ -64,10 +84,12 @@ export class TablestoreClient {
     });
 
     if (response.statusCode !== 200) {
-      const errorMessage = this.protoRoot.lookupType("tablestore.Error");
+      const protoApi = await this.getProtoApi();
+      const errorMessage = protoApi.lookupType("ots.Error");
       const buffer = await response.body.arrayBuffer();
       const decodedResponse = errorMessage.decode(new Uint8Array(buffer));
       const error = errorMessage.toObject(decodedResponse);
+      console.error(error);
       throw new Error(error.message);
     }
 
@@ -76,8 +98,6 @@ export class TablestoreClient {
   }
 
   public async getRow(req: GetRowRequest): Promise<GetRowResponse> {
-    await this.init();
-
     const primaryKey = encodePlainBuffer([
       { primaryKey: req.primaryKey, attributes: [] },
     ]);
@@ -91,9 +111,8 @@ export class TablestoreClient {
       payload.maxVersions = 1;
     }
 
-    const RequestMessage = this.protoRoot.lookupType(
-      "tablestore.GetRowRequest"
-    );
+    const protoApi = await this.getProtoApi();
+    const RequestMessage = protoApi.lookupType("ots.GetRowRequest");
     const err = RequestMessage.verify(payload);
     if (err) {
       throw new Error(err);
@@ -101,19 +120,39 @@ export class TablestoreClient {
     const encodedRequest = RequestMessage.encode(payload).finish();
 
     const buffer = await this.request("/GetRow", encodedRequest);
-    const ResponseMessage = this.protoRoot.lookupType(
-      "tablestore.GetRowResponse"
-    );
+    const ResponseMessage = protoApi.lookupType("ots.GetRowResponse");
     const decodedResponse = ResponseMessage.decode(new Uint8Array(buffer));
 
     const obj = ResponseMessage.toObject(decodedResponse);
-    if (obj.row) {
-      const b = Buffer.from(obj.row as Uint8Array);
+    if (obj.row && obj.row.length > 0) {
+      const b = obj.row as Buffer;
       const rows = decodePlainBuffer(
         b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength)
       );
-      obj.row = rows[0];
+      const pbRow = rows[0] as PlainBufferRow;
+      const row: Row = {
+        primaryKey: pbRow.primaryKey.map((cell) => {
+          return {
+            name: cell.name,
+            type: cell.type as PrimaryKeyItem["type"],
+            value: cell.value as PrimaryKeyItem["value"],
+          };
+        }),
+        attributes: pbRow.attributes.map((cell) => {
+          return {
+            name: cell.name,
+            type: cell.type as Attribute["type"],
+            value: cell.value as Attribute["value"],
+            ts: cell.ts,
+          };
+        }),
+      };
+      obj.row = row;
+    } else {
+      obj.row = null;
     }
     return obj as GetRowResponse;
   }
 }
+
+export * from "./types";

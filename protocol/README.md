@@ -1,0 +1,1 @@
+Copy from https://help.aliyun.com/zh/tablestore/developer-reference/table-store-protocolbuffer-message-definitions

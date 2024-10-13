@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       plainbuffer:
-        specifier: ^1.0.1
-        version: 1.0.1
+        specifier: ^1.0.2
+        version: 1.0.2
       protobufjs:
         specifier: ^7.4.0
         version: 7.4.0
@@ -1389,8 +1389,8 @@ packages:
     resolution: {integrity: sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ==}
     engines: {node: '>=8'}
 
-  plainbuffer@1.0.1:
-    resolution: {integrity: sha512-Ii3m5KfnJh/ymRgNsHTNtEzak9nsFq4/7xG58XUqcjcyDTbX7SqkfcrnTB5XYosKTadKYN+aG5zHNdDQluA5Rw==}
+  plainbuffer@1.0.2:
+    resolution: {integrity: sha512-3LK0JPCIUA0pruVkg9vtc3XmnPpY/d1UMUqe816lFvKdkF2RECNk9At3kAbF0XUk2kRMJ6/RLHjnqdlZrVJ/gQ==}
 
   prelude-ls@1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
@@ -3348,7 +3348,7 @@ snapshots:
     dependencies:
       find-up: 4.1.0
 
-  plainbuffer@1.0.1: {}
+  plainbuffer@1.0.2: {}
 
   prelude-ls@1.2.1: {}
 

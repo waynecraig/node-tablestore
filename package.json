@@ -22,7 +22,7 @@
     "url": "https://github.com/waynecraig/node-tablestore.git"
   },
   "dependencies": {
-    "plainbuffer": "^1.0.1",
+    "plainbuffer": "^1.0.2",
     "protobufjs": "^7.4.0",
     "undici": "^6.20.0"
   },

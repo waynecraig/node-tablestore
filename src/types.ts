@@ -28,17 +28,15 @@ export type PrimaryKeyItem = {
 export type PrimaryKey = PrimaryKeyItem[];
 
 export type TimeRange = {
-  startTime?: bigint;
-  endTime?: bigint;
-  specificTime?: bigint;
+  startTime?: number;
+  endTime?: number;
+  specificTime?: number;
 };
 
 export type GetRowResponse = {
   consumed: any;
   row: Row;
-  // required ConsumedCapacity consumed = 1;
-  // required bytes row = 2; // Plainbuffer编码为二进制
-  // optional bytes next_token = 3;
+  nextToken?: Buffer;
 };
 
 export type Row = {
@@ -47,7 +45,13 @@ export type Row = {
 };
 
 export type Attribute = {
-  columnName: string;
-  columnValue: bigint | number | boolean | string | Uint8Array;
-  timestamp: bigint;
+  name: string;
+  type:
+    | VariantType.INTEGER
+    | VariantType.DOUBLE
+    | VariantType.BOOLEAN
+    | VariantType.STRING
+    | VariantType.BLOB;
+  value: bigint | number | boolean | string | Uint8Array;
+  ts?: number;
 };
